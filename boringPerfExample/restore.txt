@@ -1,0 +1,4 @@
+Commands:
+
+tar xzvf dump.tar.gz
+arangorestore --input-directory dump
