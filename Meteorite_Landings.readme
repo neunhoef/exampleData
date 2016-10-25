@@ -1,0 +1,6 @@
+Commands:
+
+gzip -d Meteorite_Landings.csv
+arangoimp --collection meteorites --create-collection true --file Meteorite_Landings.csv --type csv --separator ,
+
+
