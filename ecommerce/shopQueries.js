@@ -104,3 +104,11 @@ query = `
              customer: customer.name, path: list[0].p.vertices[*]._key }
 `;
 
+// in the AQL editor the above traversal as graph
+query = `
+  LET customer = DOCUMENT("customers/lulu")
+  FOR i, e, p IN 3..3 ANY customer GRAPH "sales"
+    OPTIONS { uniqueVertices: "none", uniqueEdges: "none" }
+    FILTER p.vertices[2]._key != customer._key
+    RETURN p
+`;

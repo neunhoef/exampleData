@@ -4,7 +4,7 @@ delete reviews; delete reviewRel; delete r; delete gg; delete g;
 
 // Create the collections:
 ["customers", "items", "sales", "baskets", "reviews", "reviewRel"]
-  .map(db._drop);
+  .map(n => db._drop(n));
 var customers = db._create("customers",
                            {numberOfShards: 3, replicationFactor: 2});
 var items = db._create("items", {numberOfShards: 5, replicationFactor: 2});
@@ -92,10 +92,10 @@ baskets.insert({customer: "hugo",
 // Create some indexes:
 
 customers.ensureIndex({type: "skiplist", fields: ["name", "firstName"]});
-items.ensureIndex({type: "hash", fields: ["orderId"], unique: true});
+items.ensureIndex({type: "hash", fields: ["orderId"], unique: false});
 sales.ensureIndex({type: "skiplist", fields: ["date"]});
 sales.ensureIndex({type: "hash", fields: ["billingId"], unique: false});
-baskets.ensureIndex({type: "hash", fields: ["customer"], unique: true});
+baskets.ensureIndex({type: "hash", fields: ["customer"], unique: false});
 
 // Create graph:
 
